@@ -1,0 +1,12 @@
+<% messages.forEach(element=> { %>
+    <div class="alert alert-success alert-dismissible fade show" width="10px" role="alert">
+      <%= element %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"" aria-label="Close"></button>
+    </div>
+    <% }) %>
+      <% error.forEach(element=> { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= element %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% }) %>

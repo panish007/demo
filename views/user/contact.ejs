@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <link rel="icon" href="./img/logo.png" type="image/x-icon" />
+    <link rel="icon" href="./img/refresh.png" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../style.js"></script>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+ <header class="navbar navbar-dark sticky-top bg-secondary flex-md-nowrap p-0 shadow">
+        <form method="POST" id="searchform" class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0"
+            role="search">
+            <div class="p-2">
+            <input type="text" class="flag form-control form-control-dark w-100 rounded-0 border-0" id="searchname" name="name"
+                placeholder="Name Search..." aria-label="Search">
+            </div> 
+            <div  class="p-2">
+                <input type="text" class="flag form-control form-control-dark w-100 rounded-0 border-0" id="mobile" name="mobile"
+                placeholder="Mobile Search..." aria-label="Search">
+            </div>              
+            <div  class="p-2">
+                <select id="group"  class="flag btn btn-light dropdown-toggle" ><option value="">Select group </option></select>
+            </div>
+            <div class="p-2">
+                <button type="submit" id="searching" class="btn btn-success btn-small float-end" >search</button>
+            </div>
+            <div class="p-2">
+               
+                <button type="button" id="resetForm" class="btnreset btn btn-danger btn-small float-end">Reset</button>
+            </div>
+        </form>
+    </header>
+
+    
+    <div class="container-fluid">
+        <div class="row">
+            
+            <%- include('../partials/sidebar.ejs') %>
+
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
+
+
+                        <div class="btn-toolbar mb-2 mb-md ">
+                            <div class="col col-sm-3">
+                            <form id="itemspage" class="position-relative" method="post">
+                                <label for="itemperpge">Item Per Page:</label>
+                            </div><div class="btn-toolbar mb-2 mb-md 0">
+                                <input type="text" id="perpage" class="form-control form-control-dark w-25  m-2 rounded-0 " placeholder="Page" autocomplete="off"/>
+                                     <input type="submit" id="Itembtn" class=" btn btn-success m-2 float-end" value="submit">
+                                </div>
+                        </div>
+
+                    </form>
+
+                        <div class="btn-toolbar mb-2 mb-md 0">
+
+                            
+                            <div class="col col-sm-3">
+                                <button type="button" id="add_data"
+                                    class="btn btn-success btn-small float-end">Add</button>
+                            </div>
+                            <div class="m-2 text-end">
+
+                            </div>
+                         
+
+                        </div>
+                       
+
+                        <div class="modal" tabindex="-1" id="action_modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="post" id="sample_form" class="contactForm">
+                                        <div class="modal-header" id="dynamic_modal_title">
+                                            <h5 class="modal-title"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Name</label>
+                                                <input type="hidden" id="contactid" name="hide" value="">
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    placeholder="First Name">
+                                            </div>   
+                                          
+                                            <div class="mb-3">
+                                                <label class="form-label">Mobile Number</label>
+                                                <input type="text" class="form-control" id="mobileNo" name="mobileNo"
+                                                    value="" placeholder="Mobile">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                            <label for="dropdown" class="form-label">Select Group:</label>
+                                            <select id="dropdown"><option value="-" >No group</option></select>
+                                        </div>
+                                        </div>
+                                        <p id="error-message" style="color: red;"></p>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" id="id" />
+                                            <input type="hidden" name="action" id="action" value="Add" />
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" id="action_button" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                  
+                    <div id="table"></div>
+
+                    <div class="row mt-3">
+                        <div class="col" id="pagination"></div>
+                      </div>
+                </main>
+        </div>
+      
+    </div>
+  
+</body>
+<script>
+ 
+</script>
+
+</html>
